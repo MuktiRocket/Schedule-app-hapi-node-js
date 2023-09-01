@@ -16,6 +16,11 @@ Please make sure you are using node version v18.17.\*
 The database we are using is https://dev.mysql.com/downloads/mysql/ as our Database.
 We are using https://www.prisma.io/docs/getting-started as our ORM tool in the project.
 
+## To run migrations and generate the tables
+
+    npx prisma migrate dev
+    npx prisma generate
+
 ## Environment file
 
 please copy the contents of `.env.example` into your `.env`
