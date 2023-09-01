@@ -18,13 +18,14 @@ const getAppointments = async ({ id, currentDate }) => {
     const appointments = await Appointment.findMany({
       where: {
         user_id: id,
-        created_at: {
+        appointment_datetime: {
           gt: currentDate,
         },
       },
       select: {
         title: true,
         agenda: true,
+        appointment_datetime: true,
         user: {
           select: {
             first_name: true,
@@ -49,7 +50,7 @@ const getAppointments = async ({ id, currentDate }) => {
   }
 };
 
-async function getAvailableUsers(datetime) {
+async function getAvailableUsers(id, datetime) {
   try {
     const users = await User.findMany({
       where: {
@@ -57,6 +58,7 @@ async function getAvailableUsers(datetime) {
           off_start_date: { lte: datetime },
           off_end_date: { gte: datetime },
         },
+        id: { not: id },
       },
       select: {
         email: true,

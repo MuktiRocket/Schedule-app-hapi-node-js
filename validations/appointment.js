@@ -7,6 +7,10 @@ const AddAppointmentValidation = {
     agenda: Joi.string().required().label("Agenda"),
     user_id: Joi.number().required(),
     with_user_id: Joi.number(),
+    datetime: Joi.string()
+      .regex(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/)
+      .required()
+      .example(formatCurrentDateTime()),
   }),
 };
 

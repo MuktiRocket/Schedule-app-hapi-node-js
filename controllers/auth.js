@@ -9,16 +9,6 @@ const {
 const registerUser = async (req, h) => {
   try {
     const { first_name, last_name, email, password, mobile } = req.payload;
-    const where = {
-      email,
-    };
-    const userDetails = await getUser({
-      where,
-    });
-
-    if (userDetails.email === email) {
-      return error({}, "User with same email exists!")(h);
-    }
 
     const hashedPass = await getHashedPassword(password);
     const data = {
@@ -71,7 +61,7 @@ const login = async (req, h) => {
       return success({ token, user: userDetails })(h);
     }
 
-    return error({}, "User not found")(h);
+    return error({}, "Invalid credentials!")(h);
   } catch (err) {
     return error({ err })(h);
   }

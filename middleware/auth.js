@@ -1,12 +1,14 @@
 const { getUser } = require("../data-access/auth");
 const { verifyToken } = require("./auth-helper");
+const { success, error } = require("../response/macros");
+
 module.exports = () => ({
   authenticate: async (req, res) => {
     try {
       let { authorization } = req.headers;
 
       if (!authorization) {
-        return warning({}, "User is not authorized.")(res);
+        return error({}, "User is not authorized.")(res);
       }
       authorization =
         authorization.split(" ")[0] === "Basic"
@@ -16,7 +18,7 @@ module.exports = () => ({
       const { data } = verifyToken(authorization);
 
       if (!data) {
-        return error({}, "Invalid token.")(res);
+        return error({}, "Invalid token. Please login!")(res);
       }
       const where = {
         id: data?.id,

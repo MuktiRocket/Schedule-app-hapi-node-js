@@ -7,12 +7,14 @@ const { success, error } = require("../response/macros");
 
 const bookAppoinment = async (req, h) => {
   try {
-    const { title, agenda, user_id, with_user_id } = req.payload;
+    const { title, agenda, user_id, with_user_id, datetime } = req.payload;
+    const newDatetime = new Date(datetime);
     const data = {
       title,
       agenda,
       user_id,
       with_user_id,
+      appointment_datetime: newDatetime,
     };
 
     const appointment = await createAppointment({
@@ -43,7 +45,9 @@ const upcomingAppointments = async (req, h) => {
 const availableUsers = async (req, h) => {
   try {
     const { datetime } = req.payload;
-    const users = await getAvailableUsers(new Date(datetime));
+    const { id } = req.user;
+
+    const users = await getAvailableUsers(id, new Date(datetime));
 
     return success({ users }, "success")(h);
   } catch (error) {

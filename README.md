@@ -34,4 +34,10 @@ Once the setup is completed run to run the project locally.
 
     npm run dev
 
+## Swagger Url And Credentials
+
+http://localhost:5000/meeting-api-docs#/
+SWAGGER_USERNAME="assignment"
+SWAGGER_PASSWORD="1234"
+
 # That's it you're all done! Thank you for your support! 👍
