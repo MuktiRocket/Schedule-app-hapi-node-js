@@ -30,14 +30,14 @@ In you project's root folder, run the following script to download the dependenc
 
     npm install
 
-Once the setup is completed run to run the project locally.
-
-    npm run dev
-
-## To run migrations and generate the tables
+ To run migrations and generate the tables
 
     npx prisma migrate dev
     npx prisma generate
+
+Once the setup is completed run to run the project locally.
+
+    npm run dev
 
 ## Swagger Url And Credentials
 
